@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const FeedbackSection = styled.div`
   width: 600px;
+  height: 310px;
   margin: 0 auto;
   margin-top: 40px;
   padding: 20px;
