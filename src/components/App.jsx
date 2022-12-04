@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Statistics } from './Statistics/Statistics';
 export class App extends Component {
   state = {
     good: 0,
@@ -31,7 +32,7 @@ export class App extends Component {
   render() {
     const { good, neutral, bad } = this.state;
     const totalFeedback = this.countTotalFeedback();
-    const positivePersentage =
+    const positivePercentage =
       this.countPositiveFeedbackPercentage().toFixed(0);
 
     return (
@@ -46,24 +47,13 @@ export class App extends Component {
         <button name="bad" type="button" onClick={this.addFeedback}>
           Bad
         </button>
-        <p>Statistics</p>
-        <ul>
-          <li>
-            <p>Good: {good}</p>
-          </li>
-          <li>
-            <p>Neutral: {neutral}</p>{' '}
-          </li>
-          <li>
-            <p>Bad: {bad}</p>
-          </li>
-          <li>
-            <p>Total: {totalFeedback}</p>
-          </li>
-          <li>
-            <p>Positive feedback: {good === 0 ? 0 : positivePersentage}%</p>
-          </li>
-        </ul>
+        <Statistics
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          total={totalFeedback}
+          positivePercentage={positivePercentage}
+        />
       </div>
     );
   }
