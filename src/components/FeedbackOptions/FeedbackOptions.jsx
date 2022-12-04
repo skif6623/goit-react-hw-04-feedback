@@ -1,7 +1,9 @@
+import { FeedbackBtn } from './FeedbackOptions.styled';
+
 export const FeedbackOptions = ({ onLeaveFeedback, children }) => {
   return (
-    <button name={children} type="button" onClick={onLeaveFeedback}>
+    <FeedbackBtn name={children} type="button" onClick={onLeaveFeedback}>
       {children}
-    </button>
+    </FeedbackBtn>
   );
 };
