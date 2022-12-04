@@ -1,3 +1,5 @@
+import { StatisticsTitle } from './Statistics.styled';
+
 export const Statistics = ({
   good,
   neutral,
@@ -7,7 +9,7 @@ export const Statistics = ({
 }) => {
   return (
     <>
-      <p>Statistics</p>
+      <StatisticsTitle>Statistics</StatisticsTitle>
       <ul>
         <li>
           <p>Good: {good}</p>
