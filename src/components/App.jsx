@@ -11,24 +11,6 @@ export function App() {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const addFeedback = e => {
-    const { name } = e.currentTarget;
-
-    switch (name) {
-      case 'good':
-        return setGood(state => state + 1);
-
-      case 'neutral':
-        return setNeutral(state => state + 1);
-
-      case 'bad':
-        return setBad(state => state + 1);
-
-      default:
-        return;
-    }
-  };
-
   const countTotalFeedback = () => {
     return good + bad + neutral;
   };
@@ -41,11 +23,17 @@ export function App() {
     <>
       <Section title="Please leave feedback">
         <Box display="flex" justifyContent="center" gridGap={20} mb={20}>
-          <FeedbackOptions onLeaveFeedback={addFeedback}>good</FeedbackOptions>
-          <FeedbackOptions onLeaveFeedback={addFeedback}>
+          <FeedbackOptions onLeaveFeedback={() => setGood(state => state + 1)}>
+            good
+          </FeedbackOptions>
+          <FeedbackOptions
+            onLeaveFeedback={() => setNeutral(state => state + 1)}
+          >
             neutral
           </FeedbackOptions>
-          <FeedbackOptions onLeaveFeedback={addFeedback}>bad</FeedbackOptions>
+          <FeedbackOptions onLeaveFeedback={() => setBad(state => state + 1)}>
+            bad
+          </FeedbackOptions>
         </Box>
         {countTotalFeedback() === 0 ? (
           <Notification message="There is no feedback" />
