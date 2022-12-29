@@ -1,51 +1,47 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './Statistics/Statistics';
 import { Section } from './Section/Section';
 import { Notification } from './Notification/Notification';
 import { GlobalStyle } from './GlobalStyle';
 import { Box } from './Box';
+import { setGood, setBad, setNeutral } from 'redux/actions';
 
 export function App() {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const value = useSelector(state => state);
+  const dispatch = useDispatch();
 
   const countTotalFeedback = () => {
+    const { good, bad, neutral } = value;
     return good + bad + neutral;
   };
 
   const countPositiveFeedbackPercentage = () => {
-    return (good / countTotalFeedback()) * 100;
+    return (value.good / countTotalFeedback()) * 100;
   };
 
   return (
     <>
       <Section title="Please leave feedback">
         <Box display="flex" justifyContent="center" gridGap={20} mb={20}>
-          <FeedbackOptions onLeaveFeedback={() => setGood(state => state + 1)}>
+          <FeedbackOptions onLeaveFeedback={() => dispatch(setGood())}>
             good
           </FeedbackOptions>
-          <FeedbackOptions
-            onLeaveFeedback={() => setNeutral(state => state + 1)}
-          >
+          <FeedbackOptions onLeaveFeedback={() => dispatch(setNeutral())}>
             neutral
           </FeedbackOptions>
-          <FeedbackOptions onLeaveFeedback={() => setBad(state => state + 1)}>
+          <FeedbackOptions onLeaveFeedback={() => dispatch(setBad())}>
             bad
           </FeedbackOptions>
         </Box>
-        {countTotalFeedback() === 0 ? (
-          <Notification message="There is no feedback" />
-        ) : (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={countTotalFeedback()}
-            positivePercentage={countPositiveFeedbackPercentage().toFixed(0)}
-          />
-        )}
+        {/* {countTotalFeedback() === 0 ? (
+            <Notification message="There is no feedback" />
+          ) : (
+            <Statistics
+            // positivePercentage={countPositiveFeedbackPercentage().toFixed(0)}
+            />
+          )} */}
       </Section>
       <GlobalStyle />
     </>

@@ -9,20 +9,20 @@ const initState = {
 
 const rootReducer = (state = initState, actions) => {
   switch (actions.type) {
-    case 'good':
+    case 'good/setGood':
       return {
         ...state,
-        good: state.good + 1,
+        good: state.good + actions.payload,
       };
-    case 'neutral':
+    case 'neutral/setNeutral':
       return {
         ...state,
-        neutral: state.neutral + 1,
+        neutral: state.neutral + actions.payload,
       };
-    case 'bad':
+    case 'bad/setBad':
       return {
         ...state,
-        bad: state.bad + 1,
+        bad: state.bad + actions.payload,
       };
     default:
       return state;
@@ -31,4 +31,4 @@ const rootReducer = (state = initState, actions) => {
 
 const enhancer = devToolsEnhancer();
 
-const store = createStore(rootReducer, enhancer);
+export const store = createStore(rootReducer, enhancer);
