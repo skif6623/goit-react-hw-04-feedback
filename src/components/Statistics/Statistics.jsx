@@ -3,18 +3,18 @@ import { Notification } from 'components/Notification/Notification';
 import { StatisticsTitle } from './Statistics.styled';
 
 export const Statistics = () => {
-  const value = useSelector(state => state);
+  const state = useSelector(value => value);
 
   const countTotalFeedback = () => {
-    const { good, bad, neutral } = value;
+    const { good, bad, neutral } = state;
     return good + bad + neutral;
   };
 
   const countPositiveFeedbackPercentage = () => {
-    return (value.good / countTotalFeedback()) * 100;
+    return (state.good / countTotalFeedback()) * 100;
   };
 
-  const { good, bad, neutral } = value;
+  const { good, bad, neutral } = state;
 
   return (
     <>
