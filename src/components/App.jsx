@@ -1,25 +1,13 @@
-import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './Statistics/Statistics';
 import { Section } from './Section/Section';
-import { Notification } from './Notification/Notification';
 import { GlobalStyle } from './GlobalStyle';
 import { Box } from './Box';
 import { setGood, setBad, setNeutral } from 'redux/actions';
 
 export function App() {
-  const value = useSelector(state => state);
   const dispatch = useDispatch();
-
-  const countTotalFeedback = () => {
-    const { good, bad, neutral } = value;
-    return good + bad + neutral;
-  };
-
-  const countPositiveFeedbackPercentage = () => {
-    return (value.good / countTotalFeedback()) * 100;
-  };
 
   return (
     <>
@@ -35,13 +23,7 @@ export function App() {
             bad
           </FeedbackOptions>
         </Box>
-        {/* {countTotalFeedback() === 0 ? (
-            <Notification message="There is no feedback" />
-          ) : (
-            <Statistics
-            // positivePercentage={countPositiveFeedbackPercentage().toFixed(0)}
-            />
-          )} */}
+        <Statistics />
       </Section>
       <GlobalStyle />
     </>
